@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="Helpers\ExpectedInputAndOutput.cs" />
     <Compile Include="Helpers\IRunable.cs" />
+    <Compile Include="Helpers\Outcome.cs" />
     <Compile Include="Helpers\Runable.cs" />
+    <Compile Include="Helpers\RunResult.cs" />
     <Compile Include="Helpers\RunXTimesAttribute.cs" />
     <Compile Include="Questions\FirstNonRepeatingCharacterInString.cs" />
     <Compile Include="Helpers\IQuestion.cs" />

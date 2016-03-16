@@ -1,11 +1,7 @@
-﻿using InterviewPrep.Questions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using InterviewPrep.Helpers;
 
 namespace InterviewPrep
@@ -14,7 +10,7 @@ namespace InterviewPrep
     {
         static void Main(string[] args)
         {
-            var output = new List<string>();
+            var output = new List<RunResult>();
             var toTest = Assembly.GetExecutingAssembly()
                 .GetTypes()
                 .Where(t => t.Namespace == "InterviewPrep.Questions" && t.IsClass && t.IsSubclassOf(typeof(Runable)))
@@ -23,12 +19,16 @@ namespace InterviewPrep
             foreach (var test in toTest)
             {
                 output.AddRange(test.Runable.Run());
-                output.Add(" ");
             }
 
-            foreach (var o in output)
+            foreach (var o in output.GroupBy(x => x.QuestionName))
             {
-                Console.WriteLine(o);
+                Console.WriteLine(o.Key);
+                foreach (var result in o)
+                {
+                    Console.WriteLine(result.GetConsoleString());
+                }
+                Console.WriteLine();
             }
 
             Console.ReadKey();

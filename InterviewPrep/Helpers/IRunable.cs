@@ -6,6 +6,6 @@ namespace InterviewPrep.Helpers
 {
     interface IRunable
     {
-        IEnumerable<string> Run();
+        IEnumerable<RunResult> Run();
     }
 }

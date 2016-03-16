@@ -29,10 +29,10 @@ namespace InterviewPrep.Helpers
             return runXTimesAttribute?.Times ?? RunXTimes;
         }
 
-        public IEnumerable<string> Run()
+        public IEnumerable<RunResult> Run()
         {
             int count = 0;
-            var results = new List<string>();
+            var results = new List<RunResult>();
 
             var timesToRun = GetTimesToRunEachTest();
 
@@ -43,7 +43,8 @@ namespace InterviewPrep.Helpers
             var outputType = genericTypes[1];
 
             var enumerator = obj.TestValues.GetEnumerator() as IEnumerator;
-            results.Add(obj.QuestionName as string);
+            string questionName = (obj.QuestionName as string);
+
             while (enumerator.MoveNext())
             {
                 count++;
@@ -68,10 +69,7 @@ namespace InterviewPrep.Helpers
                     var output = roundFunction(obj.Run(input));
 
                     if ((output as IComparable).CompareTo(expectedOutput) != 0)
-                        results.Add(
-                            string.Format(
-                                "Run: {0}, Input: {1}, Expected Output: {2}, Actual Output: {3}, Failed after {4} ticks."
-                                , count, input, expectedOutput, output, stopwatch.ElapsedTicks));
+                        results.Add(ReportTestRun(Outcome.Failed, count, input,output,stopwatch.ElapsedTicks,1,questionName));
                     else
                     {
 
@@ -89,15 +87,12 @@ namespace InterviewPrep.Helpers
                         }
                         stopwatch2.Stop();
                         results.Add(
-                            ReportTestRun(Outcome.Passed, count, input, output, stopwatch2.ElapsedTicks, timesToRun, completedInTime));
+                            ReportTestRun(Outcome.Passed, count, input, output, stopwatch2.ElapsedTicks, timesToRun, questionName));
                     }
                 }
                 catch (Exception ex)
                 {
-                    results.Add(
-                        string.Format(
-                            "Run: {0}, Input: {1}, Expected Output: {2}, Failed after {3} ticks. EXCEPTION: {4}"
-                            , count, input, expectedOutput, stopwatch.ElapsedTicks, ex.ToString()));
+                    results.Add(ReportTestRun(Outcome.Exception, count,input, expectedOutput,stopwatch.ElapsedTicks, 1,questionName,ex ));
                 }
                 stopwatch.Stop();
             }
@@ -105,63 +100,18 @@ namespace InterviewPrep.Helpers
             return results;
         }
 
-        private static string ReportTestRun(Outcome outcome, int count, dynamic input, dynamic output, long ticks, int timesToRun, int completedInTime)
+        private static RunResult ReportTestRun(Outcome outcome, int count, dynamic input, dynamic output, long ticks, int timesToRun, string questionName, Exception exception = null)
         {
-            
-            return string.Format(
-                "{0}! Run: {1}, Input: {2}, Output: {3} {4} Average Run Attempt: {5} ticks"
-                , outcome, count, GenerateInputString(input), output, Environment.NewLine,(int) (ticks/timesToRun));
-        }
-
-        private enum Outcome
-        {
-            Passed, 
-            Failed, 
-            Exception
-        }
-
-        private static string GenerateInputString(dynamic input)
-        {
-            StringBuilder inputString = null;
-            if (input is IEnumerable && !(input is string))
+            return new RunResult()
             {
-                var enumerator = input.GetEnumerator() as IEnumerator;
-
-                inputString = new StringBuilder("[");
-                bool tooLong = false;
-                object last = null;
-                while (enumerator.MoveNext())
-                {
-                    if (inputString.Length + enumerator.Current.ToString().Length > 50)
-                    {
-                        tooLong = true;
-                    }
-
-                    if (tooLong)
-                    {
-                        last = enumerator.Current;
-                        continue;
-                    }
-
-                    inputString.AppendFormat(" {0},", enumerator.Current);
-                }
-                if (tooLong) //either add the ... and final value
-                    inputString.AppendFormat("... {0}", last);
-                else // or get rid of the trailing comma
-                    inputString.Remove(inputString.Length - 1, 1);
-                inputString.Append("]");
-            }
-            if (inputString == null)
-            {
-                string s = input.ToString();
-                if (s.Length > 55)
-                {
-                    return string.Format("{0} ... {1}", s.Substring(0, 50), s.Substring(s.Length - 4));
-                }
-                return s;
-            }
-
-            return inputString.ToString();
+                Outcome = outcome,
+                AverageTicksPerAttempt = (int)(ticks / timesToRun),
+                Exception = exception, 
+                Input = input, 
+                Output = output,
+                Run = count, 
+                QuestionName = questionName
+            };
         }
     }
 }
