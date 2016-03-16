@@ -127,3 +127,7 @@ It is important to note that the input and output of this function are the gener
             return linkedListHead != null ? linkedListHead.Data : ' ';
         }
         
+Running your new Question
+======
+Simply run the application.  I built a runner into program, so it will pick up your question and run it for you.  
+**I think it does not display exceptions correctly right now.  I will fix that soon**
