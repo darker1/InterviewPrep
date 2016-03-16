@@ -49,6 +49,8 @@
     <Compile Include="Helpers\Runable.cs" />
     <Compile Include="Helpers\RunResult.cs" />
     <Compile Include="Helpers\RunXTimesAttribute.cs" />
+    <Compile Include="Helpers\BinaryTreeNode.cs" />
+    <Compile Include="Questions\BuildBinaryTree.cs" />
     <Compile Include="Questions\FirstNonRepeatingCharacterInString.cs" />
     <Compile Include="Helpers\IQuestion.cs" />
     <Compile Include="Helpers\Node.cs" />
