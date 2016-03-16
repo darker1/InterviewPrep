@@ -51,6 +51,7 @@
     <Compile Include="Helpers\RunXTimesAttribute.cs" />
     <Compile Include="Helpers\BinaryTreeNode.cs" />
     <Compile Include="Questions\BuildBinaryTree.cs" />
+    <Compile Include="Questions\FindMaxValueInSemiSortedArray.cs" />
     <Compile Include="Questions\FirstNonRepeatingCharacterInString.cs" />
     <Compile Include="Helpers\IQuestion.cs" />
     <Compile Include="Helpers\Node.cs" />
