@@ -28,6 +28,8 @@ Expectations of the IQuestion Interface
         string QuestionName { get; }
     }
 
+if TInput is IClonable, the runner will give the question a deep copy of the input as to preserve the original input. 
+
 Test Values
 ------
 
