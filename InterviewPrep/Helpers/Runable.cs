@@ -41,7 +41,7 @@ namespace InterviewPrep.Helpers
 
             var inputType = genericTypes[0];
             var outputType = genericTypes[1];
-
+            
             var enumerator = obj.TestValues.GetEnumerator() as IEnumerator;
             string questionName = (obj.QuestionName as string);
 
@@ -52,6 +52,13 @@ namespace InterviewPrep.Helpers
 
                 var input = inputAndOutput.Input;
                 var expectedOutput = inputAndOutput.Output;
+
+                //if input is IClonable - lets give the function a deep copy instead of the original!
+                if ((input as ICloneable) != null)
+                {
+                    input = (input as ICloneable).Clone();
+                }
+
 
                 Func<object, object> roundFunction = inputAndOutput.ShouldRoundOutput ? 
                     (o) =>
@@ -69,10 +76,9 @@ namespace InterviewPrep.Helpers
                     var output = roundFunction(obj.Run(input));
 
                     if ((output as IComparable).CompareTo(expectedOutput) != 0)
-                        results.Add(ReportTestRun(Outcome.Failed, count, input,output,stopwatch.ElapsedTicks,1,questionName));
+                        results.Add(ReportTestRun(Outcome.Failed, count, inputAndOutput.Input, output,stopwatch.ElapsedTicks,1,questionName));
                     else
                     {
-
                         int ticksAllowedPerAttempt = inputAndOutput.TicksAllowedPerAttempt;
                         int completedInTime = 0;
                         var stopwatch2 = new Stopwatch();
@@ -87,12 +93,12 @@ namespace InterviewPrep.Helpers
                         }
                         stopwatch2.Stop();
                         results.Add(
-                            ReportTestRun(Outcome.Passed, count, input, output, stopwatch2.ElapsedTicks, timesToRun, questionName));
+                            ReportTestRun(Outcome.Passed, count, inputAndOutput.Input, output, stopwatch2.ElapsedTicks, timesToRun, questionName));
                     }
                 }
                 catch (Exception ex)
                 {
-                    results.Add(ReportTestRun(Outcome.Exception, count,input, expectedOutput,stopwatch.ElapsedTicks, 1,questionName,ex ));
+                    results.Add(ReportTestRun(Outcome.Exception, count, inputAndOutput.Input, expectedOutput,stopwatch.ElapsedTicks, 1,questionName,ex ));
                 }
                 stopwatch.Stop();
             }
