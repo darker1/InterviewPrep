@@ -53,6 +53,8 @@
     <Compile Include="Helpers\BinaryTreeNode.cs" />
     <Compile Include="Helpers\TreeNode.cs" />
     <Compile Include="Questions\BuildBinaryTree.cs" />
+    <Compile Include="Questions\GivenPatternFindAllPossibleStrings.cs" />
+    <Compile Include="Questions\ProductOfOtherItemsInAnArray.cs" />
     <Compile Include="Questions\FibinacciNumbersLessThanN.cs" />
     <Compile Include="Questions\FindMaxValueInSemiSortedArray.cs" />
     <Compile Include="Questions\FirstNonRepeatingCharacterInString.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Questions\LargestSumContiguousInArray.cs" />
     <Compile Include="Questions\MergeSort.cs" />
+    <Compile Include="Questions\SchedulingConflict.cs" />
     <Compile Include="Questions\SquareRoot.cs" />
     <Compile Include="Questions\SumInArray.cs" />
   </ItemGroup>
