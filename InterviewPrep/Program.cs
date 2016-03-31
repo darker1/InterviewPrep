@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using InterviewPrep.Dictionary;
 using InterviewPrep.Helpers;
 
 namespace InterviewPrep
@@ -10,6 +11,9 @@ namespace InterviewPrep
     {
         static void Main(string[] args)
         {
+            //buid out the dictionary
+            var tmp = LowercaseWords.TrieDictionary;
+
             var output = new List<RunResult>();
             var toTest = Assembly.GetExecutingAssembly()
                 .GetTypes()
