@@ -54,7 +54,9 @@
     <Compile Include="Helpers\BinaryTreeNode.cs" />
     <Compile Include="Helpers\TreeNode.cs" />
     <Compile Include="Helpers\TrieNode.cs" />
+    <Compile Include="Questions\Anagrams.cs" />
     <Compile Include="Questions\BuildBinaryTree.cs" />
+    <Compile Include="Questions\EnumerableOfEnumerable.cs" />
     <Compile Include="Questions\GivenPatternFindAllPossibleStrings.cs" />
     <Compile Include="Questions\ProductOfOtherItemsInAnArray.cs" />
     <Compile Include="Questions\FibinacciNumbersLessThanN.cs" />
