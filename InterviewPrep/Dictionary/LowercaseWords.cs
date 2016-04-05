@@ -16,7 +16,7 @@ namespace InterviewPrep.Dictionary
                 return _trie;
             }
         }
-
+        
         private static TrieNode<char> _trie; 
 
         private static void BuildTrie()
@@ -43,6 +43,18 @@ namespace InterviewPrep.Dictionary
                 currentTrieNode.IsValid = true;
             }
         }
+
+        public static HashSet<string> HashSetDictionary
+        {
+            get
+            {
+                if(_hashSet == null)
+                    _hashSet = new HashSet<string>(Words);
+                return _hashSet;
+            }
+        }
+
+        private static HashSet<string> _hashSet;
 
 
         public static string[] Words

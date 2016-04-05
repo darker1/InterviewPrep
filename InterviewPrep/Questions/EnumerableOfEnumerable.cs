@@ -107,7 +107,7 @@ namespace InterviewPrep.Questions
         }
 
         public string QuestionName {
-            get { return "Create a crazy enumerator class that takes an IEnumerable<IEnumerable<char>> and traverses it by visiting each Outer IEnumerable once before moving down the line on the interior IEnumerables.  Ex. [[a,d],[b,e],[c]] would print out in the order abcde."; }
+            get { return "Create a crazy enumerator class that takes an IEnumerable<IEnumerable<char>> and traverses it by visiting each Outer IEnumerable once before moving down the line on the interior IEnumerables.  Ex. [[a,d],[b],[c,e]] would print out in the order abcde."; }
         }
     }
 }

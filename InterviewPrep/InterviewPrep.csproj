@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dictionary\LowercaseWords.cs" />
+    <Compile Include="Helpers\BinarySearchTree.cs" />
     <Compile Include="Helpers\ComparableArray.cs" />
     <Compile Include="Helpers\ExpectedInputAndOutput.cs" />
     <Compile Include="Helpers\IRunable.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Questions\MergeSort.cs" />
     <Compile Include="Questions\SchedulingConflict.cs" />
     <Compile Include="Questions\Scrabble.cs" />
+    <Compile Include="Questions\Boggle.cs" />
+    <Compile Include="Questions\SecondLargestItemInBst.cs" />
     <Compile Include="Questions\SquareRoot.cs" />
     <Compile Include="Questions\SumInArray.cs" />
   </ItemGroup>
